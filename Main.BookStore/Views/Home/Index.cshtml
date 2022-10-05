@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -8,15 +7,26 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-   
+
     <title>Index</title>
+
     <link href="~/css/site.css" rel="stylesheet" />
-</head>
-<body>
-    <img src="~/images/logoh2m-background1.png" alt="logo" class="logo"/>
-     
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
     
-    <h1>Welcome to book store collection</h1>
+</head>
+<body class="container">
+    <img src="~/images/logoh2m-background1.png" alt="logo" class="logo" />
+
+ <input type="button" value="Click Me" class="btn btn-primary" />
+    <h1 class="h1">Welcome to book store collection</h1>
     <p>This is Home Page</p>
 </body>
+<script src="~/lib/jquery/jquery.js"></script> 
+
 </html>
+
+<script>
+    $(document).ready(function (){
+        alert("Ayeh");
+    });
+</script>

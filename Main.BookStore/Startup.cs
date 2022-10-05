@@ -40,8 +40,8 @@ namespace Main.BookStore
             //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "MyStaticFiles")),
             //    RequestPath= "/MyStaticFiles"
 
-            //});
-            app.UseRouting();*/
+            //});*/
+            app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
