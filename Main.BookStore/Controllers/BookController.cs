@@ -7,8 +7,10 @@ namespace Main.BookStore.Controllers
 {
     public class BookController : Controller
     {
-        private readonly BookRepository _bookRepository = null;
+        [ViewData]
+        public string PageTitle { get; set; }
 
+        private readonly BookRepository _bookRepository = null;
        
 
         public BookController()
@@ -18,13 +20,18 @@ namespace Main.BookStore.Controllers
 
         public ViewResult GetAllBooks()
         {
+            PageTitle = "Books";
+
             var books= _bookRepository.GetAllBooks();
             return View(books);
         }
         public ViewResult GetBook(int id)
         {
+            
             var book= _bookRepository.GetBookById(id);
+            PageTitle = book.Title + " Book Details ";
             return View(book); 
+
         }
         public List<BookModel> SearchBook(string title, string author)
         {

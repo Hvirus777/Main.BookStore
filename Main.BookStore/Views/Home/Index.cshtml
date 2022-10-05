@@ -1,7 +1,9 @@
 ﻿ 
 @{
-    ViewData["Title"] = "Home";
+    //ViewData["Title"] = "Home";
     var data = ViewBag.Data;
+
+    var bookData = ViewData["bookModel"] as BookModel;  // have to caste ViewData Property into BookModel obj, else it will give error during compile time
 }
 
 <section class="jumbotron text-center">
@@ -9,6 +11,8 @@
         <h1> Welcome to BookStore </h1>
         <br />
         <h1>@data.id + @data.name</h1>
+        <h1>ViewData Attribute + @ViewData["CustomProperty"]</h1>
+        <h2>Complex Data: @bookData.Id + @bookData.Title</h2>
         <p class="lead text-muted">
             This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.
         </p>
