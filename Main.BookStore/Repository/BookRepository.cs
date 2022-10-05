@@ -28,11 +28,12 @@ namespace Main.BookStore.Repository
         {
             return new List<BookModel>()
             {
-                new BookModel(){Id=1,Title="MVC",Author="Nitish" },
-                new BookModel(){Id=2,Title="Dot Net Core",Author="Nitish" },
-                new BookModel(){Id=3,Title="C#",Author="Monica" },
-                new BookModel(){Id=4,Title="JAVA",Author="Harsh" },
-                new BookModel(){Id=5,Title="PHP",Author="Harsh" }
+                new BookModel(){Id=1,Title="MVC",Author="Nitish",Description="This is the description of MVC Book" },
+                new BookModel(){Id=2,Title="Dot Net Core",Author="Nitish",Description="This is the description of Dot Net Core Book" },
+                new BookModel(){Id=3,Title="C#",Author="Monica",Description="This is the description of C# Book" },
+                new BookModel(){Id=4,Title="JAVA",Author="Harsh" ,Description="This is the description of JAVA Book"},
+                new BookModel(){Id=5,Title="JAVA",Author="Harsh" ,Description="This is the description of JAVA Book"},
+                new BookModel(){Id=6,Title="Azure DevOps",Author="Nitish",Description="This is the description of Azure DevOps Book" }
             };
         }
     }
