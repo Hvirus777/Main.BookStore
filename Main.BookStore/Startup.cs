@@ -19,6 +19,13 @@ namespace Main.BookStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            // this should only work in Development Env, not in Testing or production or staging so to do that we use #If debug statement
+
+#if DEBUG
+
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
