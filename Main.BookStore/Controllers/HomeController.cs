@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Dynamic;
 
 namespace Main.BookStore.Controllers
 {
@@ -7,6 +8,12 @@ namespace Main.BookStore.Controllers
 
         public ViewResult Index()
         {
+            dynamic data = new ExpandoObject();
+            data.id = 1;
+            data.name = "Harsh";
+
+            ViewBag.Data = data;
+
             return View();
         }
         public ViewResult AboutUs()

@@ -1,7 +1,14 @@
 ﻿ 
+@{
+    ViewData["Title"] = "Home";
+    var data = ViewBag.Data;
+}
+
 <section class="jumbotron text-center">
     <div class="container">
         <h1> Welcome to BookStore </h1>
+        <br />
+        <h1>@data.id + @data.name</h1>
         <p class="lead text-muted">
             This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.
         </p>
@@ -68,7 +75,7 @@
 
     <script>
         $(document).ready(function () {
-            alert("Its me");
+          
         });
     </script>
 }
