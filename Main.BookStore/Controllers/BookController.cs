@@ -26,7 +26,9 @@ namespace Main.BookStore.Controllers
             var books= _bookRepository.GetAllBooks();
             return View(books);
         }
-        public ViewResult GetBook(int id)
+
+        [Route("/book-details/{id}",Name="BookDetailsRoute")]
+        public ViewResult GetBook(int id,string nameOfBook)
         { // Passing data as anonymous to understand Dynamic View Concept. Avoid Dynamic view concept
 
             dynamic data = new ExpandoObject(); 

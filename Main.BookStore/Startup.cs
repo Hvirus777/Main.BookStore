@@ -54,6 +54,11 @@ namespace Main.BookStore
             {
                 endpoints.MapDefaultControllerRoute();
 
+                //endpoints.MapControllerRoute(
+                //        name:"Default",
+                //        pattern: "bookApp/{controller=Home}/{action=Index}/{id?}"
+                //);
+
                 //endpoints.MapGet("/", async context =>
                 //{
                 //    await context.Response.WriteAsync("Hello World!");
