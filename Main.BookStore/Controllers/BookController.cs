@@ -21,9 +21,10 @@ namespace Main.BookStore.Controllers
             var books= _bookRepository.GetAllBooks();
             return View(books);
         }
-        public BookModel GetBook(int id)
+        public ViewResult GetBook(int id)
         {
-            return _bookRepository.GetBookById(id);
+            var book= _bookRepository.GetBookById(id);
+            return View(book); 
         }
         public List<BookModel> SearchBook(string title, string author)
         {
