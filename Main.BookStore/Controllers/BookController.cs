@@ -2,6 +2,7 @@
 using Main.BookStore.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Dynamic;
 
 namespace Main.BookStore.Controllers
 {
@@ -26,11 +27,18 @@ namespace Main.BookStore.Controllers
             return View(books);
         }
         public ViewResult GetBook(int id)
-        {
-            
-            var book= _bookRepository.GetBookById(id);
-            PageTitle = book.Title + " Book Details ";
-            return View(book); 
+        { // Passing data as anonymous to understand Dynamic View Concept. Avoid Dynamic view concept
+
+            dynamic data = new ExpandoObject(); 
+            data.book= _bookRepository.GetBookById(id);
+            data.name = "Harsh Soni";
+
+
+           // var book= 
+
+
+            PageTitle = data.book.Title + " Book Details ";
+            return View(data); 
 
         }
         public List<BookModel> SearchBook(string title, string author)

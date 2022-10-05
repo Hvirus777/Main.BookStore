@@ -17,7 +17,7 @@ namespace Main.BookStore.Controllers
 
         public ViewResult Index()
         {
-            dynamic data = new ExpandoObject();
+            dynamic data = new ExpandoObject(); // ExpandoObject is used to pass Anonymous Object
             data.id = 1;
             data.name = "Harsh";
 
