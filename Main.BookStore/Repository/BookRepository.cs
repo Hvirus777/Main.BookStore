@@ -1,4 +1,7 @@
-﻿using Main.BookStore.Models;
+﻿using Main.BookStore.Data;
+using Main.BookStore.Models;
+using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
@@ -7,6 +10,33 @@ namespace Main.BookStore.Repository
 {
     public class BookRepository
     {
+
+        private readonly BookStoreContext _context = null;
+
+        public BookRepository(BookStoreContext context)
+        {
+            _context = context;
+        }
+
+        public int AddNewBook(BookModel model)
+        {
+            var books = new Books()
+            {
+                Author = model.Author,
+                Title = model.Title,
+                Description = model.Description,
+                TotalPages = model.TotalPages,
+                CreatedOn = DateTime.UtcNow,
+                UpdatedOn = DateTime.UtcNow,
+            };
+
+            _context.books.Add(books);
+            _context.SaveChanges();
+
+            return books.Id;
+
+        }
+
         public List<BookModel> GetAllBooks()
         {
             return DataSource();
