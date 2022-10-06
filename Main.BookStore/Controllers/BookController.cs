@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace Main.BookStore.Controllers
@@ -61,7 +63,12 @@ namespace Main.BookStore.Controllers
 
 
 
-            ViewBag.Language = new SelectList(LanguageList(), "Id", "Text");
+            ViewBag.Language = LanguageList().Select(x => new SelectListItem()
+            {
+                Text = x.Text,
+                Value = x.Id.ToString(),
+                Disabled=x.Disable
+            }).ToList();
 
             PageTitle = " Add new Book";
             ViewBag.IsSuccess = isSuccess;
@@ -84,8 +91,8 @@ namespace Main.BookStore.Controllers
 
             }
             ViewBag.Language = new SelectList(LanguageList(), "Id", "Text");
-            
-           
+
+
 
             return View();
         }
@@ -93,11 +100,11 @@ namespace Main.BookStore.Controllers
         private List<LanguageModel> LanguageList()
         {
             return new List<LanguageModel>() {
-                new LanguageModel() { Id=1,Text="English"},
-                new LanguageModel() { Id=2,Text="Hindi"},
-                new LanguageModel() { Id=3,Text="Dutch"},
-                new LanguageModel() { Id=4,Text="Japanese"},
-                new LanguageModel() { Id=5,Text="Korean"}
+                new LanguageModel() { Id=1,Text="English",Disable=true},
+                new LanguageModel() { Id=2,Text="Hindi",Disable=false},
+                new LanguageModel() { Id=3,Text="Dutch",Disable=true},
+                new LanguageModel() { Id=4,Text="Japanese",Disable=false},
+                new LanguageModel() { Id=5,Text="Korean",Disable=true}
             };
         }
     }
