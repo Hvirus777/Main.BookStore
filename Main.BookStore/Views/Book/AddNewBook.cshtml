@@ -28,16 +28,16 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="Language"></label>
+                <label asp-for="LanguageId"></label>
                 @* Below both Dropdown showing eg of how to use selectlist. for 1. we are using view to pass selectList and for other we are passing selectList from Controller*@
 
                @* <select asp-for="Language" class="form-control" asp-items="new SelectList( ViewBag.Language)">               
                 </select>*@
 
-                <select asp-for="Language" class="form-control" asp-items="ViewBag.Language">    
+                <select asp-for="LanguageId" class="form-control" asp-items="ViewBag.Language">    
                     <option value="">Please select book language</option>
                 </select>
-                <span asp-validation-for="Language" class="text-danger"></span>
+                <span asp-validation-for="LanguageId" class="text-danger"></span>
                 
                 
                 @*MultiSelect*@
@@ -49,11 +49,11 @@
                 <br />
 
                 @*DropDown Using Enum*@
-                <label asp-for="LanguageEnums"></label>
+               @* <label asp-for="LanguageEnums"></label>
                 <select asp-for="LanguageEnums" class="form-control" asp-items="Html.GetEnumSelectList<LanguageEnum>()">
                     <option value="">Please select book language</option>
                 </select>
-                <span asp-validation-for="LanguageEnums" class="text-danger"></span>
+                <span asp-validation-for="LanguageEnums" class="text-danger"></span>*@
 
             </div>
 

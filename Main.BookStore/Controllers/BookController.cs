@@ -16,11 +16,13 @@ namespace Main.BookStore.Controllers
         public string PageTitle { get; set; }
 
         private readonly BookRepository _bookRepository = null;
+        private readonly LanguageRepository _languageRepository = null;
 
 
-        public BookController(BookRepository bookRepository)
+        public BookController(BookRepository bookRepository, LanguageRepository languageRepository)
         {
             _bookRepository = bookRepository;
+            _languageRepository = languageRepository;
         }
 
         public async Task<IActionResult> GetAllBooks()
@@ -54,23 +56,16 @@ namespace Main.BookStore.Controllers
 
 
         [Route("/New-Book")]
-        public ViewResult AddNewBook(bool isSuccess = false, int bookId = 0)
+        public async Task<ViewResult> AddNewBook(bool isSuccess = false, int bookId = 0)
         {
             var model = new BookModel()
             {
-                Language = "2"
+                LanguageId = 2
             };
 
 
-
-            //ViewBag.Language = LanguageList().Select(x => new SelectListItem()
-            //{
-            //    Text = x.Text,
-            //    Value = x.Id.ToString(),
-            //    Disabled=x.Disable,
-            //   // Group=x.Group
-            //}).ToList();
-
+            ViewBag.Language =  new SelectList(await _languageRepository.GetAllLanguage(),"Id","Name");
+            
             PageTitle = " Add new Book";
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
@@ -91,27 +86,13 @@ namespace Main.BookStore.Controllers
                 }
 
             }
-            //ViewBag.Language = new SelectList(LanguageList(), "Id", "Text");
+            ViewBag.Language = new SelectList(await _languageRepository.GetAllLanguage(), "Id", "Name");
 
 
 
             return View();
         }
 
-        private List<LanguageModel> LanguageList()
-        { 
-            var group1 = new SelectListGroup { Name = "Group1" };
-            var group2 = new SelectListGroup { Name = "Group2"};
-            var group3 = new SelectListGroup { Name = "Group3", Disabled = true };
-
-            return new List<LanguageModel>() {
-                new LanguageModel() { Id=1,Text="English",Disable=false,Group=group1},
-                new LanguageModel() { Id=2,Text="Hindi",Disable=false,Group=group1},
-                new LanguageModel() { Id=3,Text="Dutch",Disable=false,Group=group2},
-                new LanguageModel() { Id=4,Text="Japanese",Disable=false, Group = group2},
-                new LanguageModel() { Id=5,Text="Korean",Disable=false, Group = group3},
-                new LanguageModel() { Id=6,Text="Tamil",Disable=false, Group = group3}
-            };
-        }
+       
     }
 }
