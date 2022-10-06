@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace Main.BookStore.Repository
 {
@@ -42,12 +43,12 @@ namespace Main.BookStore.Repository
         public async Task<List<BookModel>> GetAllBooks()
         {
             var books = new List<BookModel>();
-            var allBooks= await _context.books.ToListAsync();
+            var allBooks = await _context.books.ToListAsync();
 
-            if(allBooks?.Any()==true)
+            if (allBooks?.Any() == true)
             {
 
-                foreach(var book in allBooks)
+                foreach (var book in allBooks)
                 {
                     var bookData = new BookModel();
 
@@ -68,9 +69,30 @@ namespace Main.BookStore.Repository
             return books;
         }
 
-        public BookModel GetBookById(int id)
+        public async Task<BookModel> GetBookById(int id)
         {
-            return DataSource().Where(x => x.Id == id).FirstOrDefault();
+
+            var book= await _context.books.FindAsync(id);
+
+            if (book != null)
+            {
+                var bookData = new BookModel();
+
+                bookData.Author = book.Author;
+                bookData.Title = book.Title;
+                bookData.Description = book.Description;
+                bookData.TotalPages = book.TotalPages;
+                bookData.Category = book.Category;
+                bookData.Id = book.Id;
+                bookData.Language = book.Language;
+                bookData.CreatedOn = book.CreatedOn;
+                bookData.UpdatedOn = book.UpdatedOn;
+
+                return bookData;
+            }
+
+            return null;
+            //return DataSource().Where(x => x.Id == id).FirstOrDefault();
         }
 
 

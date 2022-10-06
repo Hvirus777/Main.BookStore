@@ -29,18 +29,18 @@ namespace Main.BookStore.Controllers
         }
 
         [Route("/book-details/{id}", Name = "BookDetailsRoute")]
-        public ViewResult GetBook(int id, string nameOfBook)
-        { // Passing data as anonymous to understand Dynamic View Concept. Avoid Dynamic view concept
+        public async Task<IActionResult> GetBook(int id, string nameOfBook)
+        { 
+            
+            // Passing data as anonymous to understand Dynamic View Concept. Avoid Dynamic view concept
 
             dynamic data = new ExpandoObject();
-            data.book = _bookRepository.GetBookById(id);
-            data.name = "Harsh Soni";
-
-
-            // var book= 
-
+            data.book = await _bookRepository.GetBookById(id);
+            data.name = "Harsh Soni"; 
 
             PageTitle = data.book.Title + " Book Details ";
+
+
             return View(data);
 
         }
