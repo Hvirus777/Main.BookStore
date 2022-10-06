@@ -36,9 +36,15 @@
                 <select asp-for="Language" class="form-control" asp-items="ViewBag.Language">    
                     <option value="">Please select book language</option>
                 </select>
-                
-
                 <span asp-validation-for="Language" class="text-danger"></span>
+                
+                
+                @*MultiSelect*@
+                <select asp-for="MultiLanguage" class="form-control" asp-items="ViewBag.Language" multiple>
+                    <option value="">Please select book language</option>
+                </select>
+                <span asp-validation-for="MultiLanguage" class="text-danger"></span>
+
             </div>
 
             <div class="form-group">

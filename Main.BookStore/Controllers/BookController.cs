@@ -68,7 +68,7 @@ namespace Main.BookStore.Controllers
                 Text = x.Text,
                 Value = x.Id.ToString(),
                 Disabled=x.Disable,
-                Group=x.Group
+               // Group=x.Group
             }).ToList();
 
             PageTitle = " Add new Book";
@@ -106,9 +106,9 @@ namespace Main.BookStore.Controllers
             var group3 = new SelectListGroup { Name = "Group3", Disabled = true };
 
             return new List<LanguageModel>() {
-                new LanguageModel() { Id=1,Text="English",Disable=true,Group=group1},
+                new LanguageModel() { Id=1,Text="English",Disable=false,Group=group1},
                 new LanguageModel() { Id=2,Text="Hindi",Disable=false,Group=group1},
-                new LanguageModel() { Id=3,Text="Dutch",Disable=true,Group=group2},
+                new LanguageModel() { Id=3,Text="Dutch",Disable=false,Group=group2},
                 new LanguageModel() { Id=4,Text="Japanese",Disable=false, Group = group2},
                 new LanguageModel() { Id=5,Text="Korean",Disable=false, Group = group3},
                 new LanguageModel() { Id=6,Text="Tamil",Disable=false, Group = group3}
