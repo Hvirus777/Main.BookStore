@@ -62,7 +62,7 @@ namespace Main.BookStore.Controllers
             PageTitle = " Add new Book";
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
-            return View();
+            return View(model);
         }
 
         [HttpPost]
