@@ -1,6 +1,7 @@
 ﻿using Main.BookStore.Models;
 using Main.BookStore.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Threading.Tasks;
@@ -30,13 +31,13 @@ namespace Main.BookStore.Controllers
 
         [Route("/book-details/{id}", Name = "BookDetailsRoute")]
         public async Task<IActionResult> GetBook(int id, string nameOfBook)
-        { 
-            
+        {
+
             // Passing data as anonymous to understand Dynamic View Concept. Avoid Dynamic view concept
 
             dynamic data = new ExpandoObject();
             data.book = await _bookRepository.GetBookById(id);
-            data.name = "Harsh Soni"; 
+            data.name = "Harsh Soni";
 
             PageTitle = data.book.Title + " Book Details ";
 
@@ -53,16 +54,13 @@ namespace Main.BookStore.Controllers
         [Route("/New-Book")]
         public ViewResult AddNewBook(bool isSuccess = false, int bookId = 0)
         {
-
-            var model = new BookModel()
-            {
-                Language = "Engish"
-            };
+            // if you want to pass selectList in view then just remove 'new selectList()' tag and just pas List<string>
+            ViewBag.Language = new SelectList(new List<string>() { "English", "Hindi", "Dutch" });
 
             PageTitle = " Add new Book";
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
-            return View(model);
+            return View();
         }
 
         [HttpPost]
@@ -79,7 +77,7 @@ namespace Main.BookStore.Controllers
                 }
 
             }
-
+            ViewBag.Language = new SelectList(new List<string>() { "English", "Hindi", "Dutch" });
             ModelState.AddModelError("", "This is customer Error message 1");
             ModelState.AddModelError("", "This is customer Error message 2");
 

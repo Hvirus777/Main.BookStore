@@ -28,13 +28,15 @@
 
             <div class="form-group">
                 <label asp-for="Language"></label>
-                <select asp-for="Language" class="form-control">
-                    <option value="">Please choose book language</option>
-                    <option value="Hindi">Hindi (One of the best language)</option>
-                    <option value="English">English (Global language)</option>
-                    <option value="Dutch">Dutch (My cutom message)</option>
+                @* Below both Dropdown showing eg of how to use selectlist. for 1. we are using view to pass selectList and for other we are passing selectList from Controller*@
 
+               @* <select asp-for="Language" class="form-control" asp-items="new SelectList( ViewBag.Language)">               
+                </select>*@
+
+                <select asp-for="Language" class="form-control" asp-items="ViewBag.Language">               
                 </select>
+                
+
                 <span asp-validation-for="Language" class="text-danger"></span>
             </div>
 
