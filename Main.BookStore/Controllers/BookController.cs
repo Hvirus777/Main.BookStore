@@ -53,6 +53,12 @@ namespace Main.BookStore.Controllers
         [Route("/New-Book")]
         public ViewResult AddNewBook(bool isSuccess = false, int bookId = 0)
         {
+
+            var model = new BookModel()
+            {
+                Language = "Engish"
+            };
+
             PageTitle = " Add new Book";
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;

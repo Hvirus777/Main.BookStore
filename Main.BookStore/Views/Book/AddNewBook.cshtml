@@ -27,6 +27,18 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
+                <label asp-for="Language"></label>
+                <select asp-for="Language" class="form-control">
+                    <option value="">Please choose book language</option>
+                    <option value="Hindi">Hindi (One of the best language)</option>
+                    <option value="English">English (Global language)</option>
+                    <option value="Dutch">Dutch (My cutom message)</option>
+
+                </select>
+                <span asp-validation-for="Language" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
                 <label asp-for="Title"></label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
