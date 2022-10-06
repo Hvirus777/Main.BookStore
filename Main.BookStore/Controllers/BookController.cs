@@ -3,6 +3,7 @@ using Main.BookStore.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Threading.Tasks;
 
 namespace Main.BookStore.Controllers
 {
@@ -19,11 +20,11 @@ namespace Main.BookStore.Controllers
             _bookRepository = bookRepository;
         }
 
-        public ViewResult GetAllBooks()
+        public async Task<IActionResult> GetAllBooks()
         {
             PageTitle = "Books";
 
-            var books = _bookRepository.GetAllBooks();
+            var books = await _bookRepository.GetAllBooks();
             return View(books);
         }
 
@@ -60,10 +61,10 @@ namespace Main.BookStore.Controllers
 
         [HttpPost]
         [Route("/New-Book")]
-        public IActionResult AddNewBook(BookModel bookModel)
+        public async Task<IActionResult> AddNewBook(BookModel bookModel)
         {
 
-            var id = _bookRepository.AddNewBook(bookModel);
+            var id = await _bookRepository.AddNewBook(bookModel);
 
             if (id > 0)
             {

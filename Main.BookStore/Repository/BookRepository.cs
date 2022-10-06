@@ -1,10 +1,12 @@
 ﻿using Main.BookStore.Data;
 using Main.BookStore.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
+using System.Threading.Tasks;
 
 namespace Main.BookStore.Repository
 {
@@ -18,7 +20,7 @@ namespace Main.BookStore.Repository
             _context = context;
         }
 
-        public int AddNewBook(BookModel model)
+        public async Task<int> AddNewBook(BookModel model)
         {
             var books = new Books()
             {
@@ -30,16 +32,40 @@ namespace Main.BookStore.Repository
                 UpdatedOn = DateTime.UtcNow,
             };
 
-            _context.books.Add(books);
-            _context.SaveChanges();
+            await _context.books.AddAsync(books);
+            await _context.SaveChangesAsync();
 
             return books.Id;
 
         }
 
-        public List<BookModel> GetAllBooks()
+        public async Task<List<BookModel>> GetAllBooks()
         {
-            return DataSource();
+            var books = new List<BookModel>();
+            var allBooks= await _context.books.ToListAsync();
+
+            if(allBooks?.Any()==true)
+            {
+
+                foreach(var book in allBooks)
+                {
+                    var bookData = new BookModel();
+
+                    bookData.Author = book.Author;
+                    bookData.Title = book.Title;
+                    bookData.Description = book.Description;
+                    bookData.TotalPages = book.TotalPages;
+                    bookData.Category = book.Category;
+                    bookData.Id = book.Id;
+                    bookData.Language = book.Language;
+                    bookData.CreatedOn = book.CreatedOn;
+                    bookData.UpdatedOn = book.UpdatedOn;
+
+                    books.Add(bookData);
+                }
+
+            }
+            return books;
         }
 
         public BookModel GetBookById(int id)

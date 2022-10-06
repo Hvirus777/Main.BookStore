@@ -1,4 +1,6 @@
-﻿namespace Main.BookStore.Models
+﻿using System;
+
+namespace Main.BookStore.Models
 {
     public class BookModel
     {
@@ -8,6 +10,8 @@
         public string Description { get; set; }
         public string Category { get; set; }
         public string Language { get; set; }
-        public int TotalPages{ get; set; }
+        public int TotalPages{ get; set; }  
+        public DateTime? CreatedOn{ get; set; } 
+        public DateTime? UpdatedOn{ get; set; } 
     }
 }
