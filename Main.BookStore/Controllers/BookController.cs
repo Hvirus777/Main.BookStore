@@ -73,7 +73,10 @@ namespace Main.BookStore.Controllers
                 }
 
             }
- 
+
+            ModelState.AddModelError("", "This is customer Error message 1");
+            ModelState.AddModelError("", "This is customer Error message 2");
+
             return View();
         }
     }
