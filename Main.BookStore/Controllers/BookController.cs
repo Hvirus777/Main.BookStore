@@ -47,5 +47,20 @@ namespace Main.BookStore.Controllers
         {
             return _bookRepository.SearchBook(title,author);
         }
+
+
+        [Route("/New-Book")]
+        public ViewResult AddNewBook()
+        {
+            PageTitle = " Add new Book";
+            return View();
+        }
+
+        [HttpPost]
+        [Route("/New-Book")]
+        public ViewResult AddNewBook(BookModel bookModel)
+        {
+            return View();
+        }
     }
 }
