@@ -63,14 +63,17 @@ namespace Main.BookStore.Controllers
         [Route("/New-Book")]
         public async Task<IActionResult> AddNewBook(BookModel bookModel)
         {
-
-            var id = await _bookRepository.AddNewBook(bookModel);
-
-            if (id > 0)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(AddNewBook), new { isSuccess = true, bookId = id });
-            }
+                var id = await _bookRepository.AddNewBook(bookModel);
 
+                if (id > 0)
+                {
+                    return RedirectToAction(nameof(AddNewBook), new { isSuccess = true, bookId = id });
+                }
+
+            }
+ 
             return View();
         }
     }

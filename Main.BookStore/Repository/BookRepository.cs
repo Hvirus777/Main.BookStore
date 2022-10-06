@@ -28,7 +28,7 @@ namespace Main.BookStore.Repository
                 Author = model.Author,
                 Title = model.Title,
                 Description = model.Description,
-                TotalPages = model.TotalPages,
+                TotalPages = model.TotalPages.HasValue ? model.TotalPages.Value : 0,
                 CreatedOn = DateTime.UtcNow,
                 UpdatedOn = DateTime.UtcNow,
             };
@@ -72,7 +72,7 @@ namespace Main.BookStore.Repository
         public async Task<BookModel> GetBookById(int id)
         {
 
-            var book= await _context.books.FindAsync(id);
+            var book = await _context.books.FindAsync(id);
 
             if (book != null)
             {
