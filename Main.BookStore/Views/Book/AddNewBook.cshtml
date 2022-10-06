@@ -1,4 +1,5 @@
-﻿@model BookModel
+﻿@using Main.BookStore.Enums
+@model BookModel
 
 @{
     ViewData["Title"] = "AddNewBook";
@@ -40,10 +41,19 @@
                 
                 
                 @*MultiSelect*@
-                <select asp-for="MultiLanguage" class="form-control" asp-items="ViewBag.Language" multiple>
+               @* <select asp-for="MultiLanguage" class="form-control" asp-items="ViewBag.Language" multiple>
                     <option value="">Please select book language</option>
                 </select>
-                <span asp-validation-for="MultiLanguage" class="text-danger"></span>
+                <span asp-validation-for="MultiLanguage" class="text-danger"></span>*@
+
+                <br />
+
+                @*DropDown Using Enum*@
+                <label asp-for="LanguageEnums"></label>
+                <select asp-for="LanguageEnums" class="form-control" asp-items="Html.GetEnumSelectList<LanguageEnum>()">
+                    <option value="">Please select book language</option>
+                </select>
+                <span asp-validation-for="LanguageEnums" class="text-danger"></span>
 
             </div>
 

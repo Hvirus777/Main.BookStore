@@ -63,13 +63,13 @@ namespace Main.BookStore.Controllers
 
 
 
-            ViewBag.Language = LanguageList().Select(x => new SelectListItem()
-            {
-                Text = x.Text,
-                Value = x.Id.ToString(),
-                Disabled=x.Disable,
-               // Group=x.Group
-            }).ToList();
+            //ViewBag.Language = LanguageList().Select(x => new SelectListItem()
+            //{
+            //    Text = x.Text,
+            //    Value = x.Id.ToString(),
+            //    Disabled=x.Disable,
+            //   // Group=x.Group
+            //}).ToList();
 
             PageTitle = " Add new Book";
             ViewBag.IsSuccess = isSuccess;
@@ -91,7 +91,7 @@ namespace Main.BookStore.Controllers
                 }
 
             }
-            ViewBag.Language = new SelectList(LanguageList(), "Id", "Text");
+            //ViewBag.Language = new SelectList(LanguageList(), "Id", "Text");
 
 
 
@@ -99,8 +99,7 @@ namespace Main.BookStore.Controllers
         }
 
         private List<LanguageModel> LanguageList()
-        {
-
+        { 
             var group1 = new SelectListGroup { Name = "Group1" };
             var group2 = new SelectListGroup { Name = "Group2"};
             var group3 = new SelectListGroup { Name = "Group3", Disabled = true };
