@@ -54,13 +54,19 @@ namespace Main.BookStore.Controllers
         [Route("/New-Book")]
         public ViewResult AddNewBook(bool isSuccess = false, int bookId = 0)
         {
-            // if you want to pass selectList in view then just remove 'new selectList()' tag and just pas List<string>
-            ViewBag.Language = new SelectList(new List<string>() { "English", "Hindi", "Dutch" });
+            var model = new BookModel()
+            {
+                Language = "2"
+            };
+
+
+
+            ViewBag.Language = new SelectList(LanguageList(), "Id", "Text");
 
             PageTitle = " Add new Book";
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
-            return View();
+            return View(model);
         }
 
         [HttpPost]
@@ -77,11 +83,22 @@ namespace Main.BookStore.Controllers
                 }
 
             }
-            ViewBag.Language = new SelectList(new List<string>() { "English", "Hindi", "Dutch" });
-            ModelState.AddModelError("", "This is customer Error message 1");
-            ModelState.AddModelError("", "This is customer Error message 2");
+            ViewBag.Language = new SelectList(LanguageList(), "Id", "Text");
+            
+           
 
             return View();
+        }
+
+        private List<LanguageModel> LanguageList()
+        {
+            return new List<LanguageModel>() {
+                new LanguageModel() { Id=1,Text="English"},
+                new LanguageModel() { Id=2,Text="Hindi"},
+                new LanguageModel() { Id=3,Text="Dutch"},
+                new LanguageModel() { Id=4,Text="Japanese"},
+                new LanguageModel() { Id=5,Text="Korean"}
+            };
         }
     }
 }

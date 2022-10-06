@@ -33,7 +33,8 @@
                @* <select asp-for="Language" class="form-control" asp-items="new SelectList( ViewBag.Language)">               
                 </select>*@
 
-                <select asp-for="Language" class="form-control" asp-items="ViewBag.Language">               
+                <select asp-for="Language" class="form-control" asp-items="ViewBag.Language">    
+                    <option value="">Please select book language</option>
                 </select>
                 
 
