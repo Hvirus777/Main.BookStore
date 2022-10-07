@@ -42,5 +42,11 @@ namespace Main.BookStore.Models
         public IFormFile CoverPhoto { get; set; }
 
         public string CoverImageURL { get; set; }
+
+        [Display(Name = "Choose the gallery Images of your book")]
+        [Required]
+        public IFormFileCollection GalleryFile { get; set; }
+
+       public List<GalleryModel> Gallery { get; set; }
     }
 }

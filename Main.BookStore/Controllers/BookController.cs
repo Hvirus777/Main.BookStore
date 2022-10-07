@@ -1,6 +1,7 @@
 ﻿using Main.BookStore.Models;
 using Main.BookStore.Repository;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -44,11 +45,14 @@ namespace Main.BookStore.Controllers
 
             // Passing data as anonymous to understand Dynamic View Concept. Avoid Dynamic view concept
 
-            dynamic data = new ExpandoObject();
-            data.book = await _bookRepository.GetBookById(id);
-            data.name = "Harsh Soni";
+            //dynamic data = new ExpandoObject();
+            //data.book = await _bookRepository.GetBookById(id);
+            //data.name = "Harsh Soni";
 
-            PageTitle = data.book.Title + " Book Details ";
+            var data = await _bookRepository.GetBookById(id);
+           
+
+            PageTitle = data.Title + " Book Details ";
 
 
             return View(data);
@@ -69,8 +73,8 @@ namespace Main.BookStore.Controllers
             };
 
 
-            ViewBag.Language =  new SelectList(await _languageRepository.GetAllLanguage(),"Id","Name");
-            
+            ViewBag.Language = new SelectList(await _languageRepository.GetAllLanguage(), "Id", "Name");
+
             PageTitle = " Add new Book";
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
@@ -85,14 +89,28 @@ namespace Main.BookStore.Controllers
             {
                 if (bookModel.CoverPhoto != null)
                 {
-                    string folder = "/books/cover/";
-                    folder += Guid.NewGuid().ToString() + bookModel.CoverPhoto.FileName;
+                    string folder = "books/cover/";
 
-                    bookModel.CoverImageURL = folder;
+                    bookModel.CoverImageURL = await UploadImage(folder, bookModel.CoverPhoto);
+                }
 
-                    string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+                if (bookModel.GalleryFile != null)
+                {
+                    string folder = "books/gallery/";
 
-                    await bookModel.CoverPhoto.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                    bookModel.Gallery = new List<GalleryModel>();
+
+                    foreach (var file in bookModel.GalleryFile)
+                    {
+                        var gallery = new GalleryModel()
+                        {
+                            Name = file.Name,
+                            URL = await UploadImage(folder, file)
+                        };
+
+                        bookModel.Gallery.Add(gallery);
+
+                    }
                 }
 
 
@@ -111,6 +129,17 @@ namespace Main.BookStore.Controllers
             return View();
         }
 
-       
+        private async Task<string> UploadImage(string folderPath, IFormFile file)
+        {
+
+            folderPath += Guid.NewGuid().ToString() + "_" + file.FileName;
+
+            string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folderPath);
+
+            await file.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+
+            return "/" + folderPath;
+        }
+
     }
 }

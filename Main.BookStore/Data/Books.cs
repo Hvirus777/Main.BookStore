@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Main.BookStore.Data
 {
@@ -17,5 +19,7 @@ namespace Main.BookStore.Data
         public DateTime? UpdatedOn{ get; set; }
 
         public Language Language { get; set; }
+
+        public ICollection<GalleryOfBooks> bookGallery { get; set; }
     }
 }

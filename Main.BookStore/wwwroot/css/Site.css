@@ -1,10 +1,5 @@
-﻿body {
-}
-
-
-.logo {
-    height: 200px;
-    width: 200px;
+﻿.jumbotron {
+    background: none;
 }
 
 a.navbar-brand {
@@ -13,13 +8,10 @@ a.navbar-brand {
     word-break: break-all;
 }
 
-.jumbotron {
-    background: none;
-    /*    a
-{
+a {
     color: #0366d6;
-}*/
 }
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
     background-color: #1b6ec2;
