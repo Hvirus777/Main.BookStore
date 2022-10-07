@@ -7,94 +7,104 @@
 }
 
 
-<div class="py-5">
-    <div class="container">
-        <h3 class="display-4">AddNewBook</h3>
 
-        <hr />
-        @if (ViewBag.IsSuccess == true)
-        {
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Congratulations</strong> You should added new book successfully. <br />
-                Click <a asp-controller="Book" asp-action="GetBook" asp-route-id="@ViewBag.BookId">here</a> to view the details
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        }
+<div class="container">
+    <h3 class="display-4">AddNewBook</h3>
+
+    <hr />
+    @if (ViewBag.IsSuccess == true)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Congratulations</strong> You should added new book successfully. <br />
+            Click <a asp-controller="Book" asp-action="GetBook" asp-route-id="@ViewBag.BookId">here</a> to view the details
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
 
 
-        <div class="d-flex justify-content-center">
-            <div class="spinner-border" role="status" id="myLoader" style="display:none">
-                <span class="sr-only"> </span>
-            </div>
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status" id="myLoader" style="display:none">
+            <span class="sr-only"> </span>
+        </div>
+    </div>
+
+    <form method="post" asp-route="" enctype="multipart/form-data" data-ajax="true" data-ajax-complete="MyComplete"
+          data-ajax-success="MySuccess" data-aja-failure="MyFailure" data-ajax-loading="#myLoader">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="LanguageId"></label>
+            @* Below both Dropdown showing eg of how to use selectlist. for 1. we are using view to pass selectList and for other we are passing selectList from Controller*@
+
+            @* <select asp-for="Language" class="form-control" asp-items="new SelectList( ViewBag.Language)">
+            </select>*@
+
+            <select asp-for="LanguageId" class="form-control" asp-items="ViewBag.Language">
+                <option value="">Please select book language</option>
+            </select>
+            <span asp-validation-for="LanguageId" class="text-danger"></span>
+
+
+            @*MultiSelect*@
+            @* <select asp-for="MultiLanguage" class="form-control" asp-items="ViewBag.Language" multiple>
+            <option value="">Please select book language</option>
+            </select>
+            <span asp-validation-for="MultiLanguage" class="text-danger"></span>*@
+
+            @* <br />*@
+
+            @*DropDown Using Enum*@
+            @* <label asp-for="LanguageEnums"></label>
+            <select asp-for="LanguageEnums" class="form-control" asp-items="Html.GetEnumSelectList<LanguageEnum>()">
+            <option value="">Please select book language</option>
+            </select>
+            <span asp-validation-for="LanguageEnums" class="text-danger"></span>*@
+
         </div>
 
-        <form method="post" asp-route="" data-ajax="true" data-ajax-complete="MyComplete"
-              data-ajax-success="MySuccess" data-aja-failure="MyFailure" data-ajax-loading="#myLoader">
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Author"></label>
+            <input asp-for="Author" class="form-control" />
+            <span asp-validation-for="Author" class="text-danger"></span>
+        </div>
 
-            <div class="form-group">
-                <label asp-for="LanguageId"></label>
-                @* Below both Dropdown showing eg of how to use selectlist. for 1. we are using view to pass selectList and for other we are passing selectList from Controller*@
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
 
-                @* <select asp-for="Language" class="form-control" asp-items="new SelectList( ViewBag.Language)">
-                </select>*@
+        <div class="form-group">
+            <label asp-for="TotalPages"></label>
+            <input asp-for="TotalPages" class="form-control" />
+            <span asp-validation-for="TotalPages" class="text-danger"></span>
+        </div>
 
-                <select asp-for="LanguageId" class="form-control" asp-items="ViewBag.Language">
-                    <option value="">Please select book language</option>
-                </select>
-                <span asp-validation-for="LanguageId" class="text-danger"></span>
-
-
-                @*MultiSelect*@
-                @* <select asp-for="MultiLanguage" class="form-control" asp-items="ViewBag.Language" multiple>
-                <option value="">Please select book language</option>
-                </select>
-                <span asp-validation-for="MultiLanguage" class="text-danger"></span>*@
-
-                @* <br />*@
-
-                @*DropDown Using Enum*@
-                @* <label asp-for="LanguageEnums"></label>
-                <select asp-for="LanguageEnums" class="form-control" asp-items="Html.GetEnumSelectList<LanguageEnum>()">
-                <option value="">Please select book language</option>
-                </select>
-                <span asp-validation-for="LanguageEnums" class="text-danger"></span>*@
-
+        <div class="form-group">
+            <label asp-for="CoverPhoto" class="control-label"></label>
+            <div class="custom-file">
+                <input asp-for="CoverPhoto" class="custom-file-input" id="customFile">
+               @* <label class="custom-file-label" for="customFile">Choose file</label>*@
             </div>
+            <span asp-validation-for="CoverPhoto" class="text-danger"></span>
+        </div>
+       
 
-            <div class="form-group">
-                <label asp-for="Title"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Author"></label>
-                <input asp-for="Author" class="form-control" />
-                <span asp-validation-for="Author" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Description"></label>
-                <textarea asp-for="Description" class="form-control"></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="TotalPages"></label>
-                <input asp-for="TotalPages" class="form-control" />
-                <span asp-validation-for="TotalPages" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Add Book" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        <div class="form-group">
+            <input type="submit" value="Add Book" class="btn btn-primary" />
+        </div>
+    </form>
 </div>
+
 
 @section scripts{
 
