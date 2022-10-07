@@ -23,7 +23,15 @@
             </div>
         }
 
-        <form method="post" asp-route="">
+
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status" id="myLoader" style="display:none">
+                <span class="sr-only"> </span>
+            </div>
+        </div>
+
+        <form method="post" asp-route="" data-ajax="true" data-ajax-complete="MyComplete"
+              data-ajax-success="MySuccess" data-aja-failure="MyFailure" data-ajax-loading="#myLoader">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -31,27 +39,27 @@
                 <label asp-for="LanguageId"></label>
                 @* Below both Dropdown showing eg of how to use selectlist. for 1. we are using view to pass selectList and for other we are passing selectList from Controller*@
 
-               @* <select asp-for="Language" class="form-control" asp-items="new SelectList( ViewBag.Language)">               
+                @* <select asp-for="Language" class="form-control" asp-items="new SelectList( ViewBag.Language)">
                 </select>*@
 
-                <select asp-for="LanguageId" class="form-control" asp-items="ViewBag.Language">    
+                <select asp-for="LanguageId" class="form-control" asp-items="ViewBag.Language">
                     <option value="">Please select book language</option>
                 </select>
                 <span asp-validation-for="LanguageId" class="text-danger"></span>
-                
-                
+
+
                 @*MultiSelect*@
-               @* <select asp-for="MultiLanguage" class="form-control" asp-items="ViewBag.Language" multiple>
-                    <option value="">Please select book language</option>
+                @* <select asp-for="MultiLanguage" class="form-control" asp-items="ViewBag.Language" multiple>
+                <option value="">Please select book language</option>
                 </select>
                 <span asp-validation-for="MultiLanguage" class="text-danger"></span>*@
 
-                <br />
+                @* <br />*@
 
                 @*DropDown Using Enum*@
-               @* <label asp-for="LanguageEnums"></label>
+                @* <label asp-for="LanguageEnums"></label>
                 <select asp-for="LanguageEnums" class="form-control" asp-items="Html.GetEnumSelectList<LanguageEnum>()">
-                    <option value="">Please select book language</option>
+                <option value="">Please select book language</option>
                 </select>
                 <span asp-validation-for="LanguageEnums" class="text-danger"></span>*@
 
@@ -62,24 +70,46 @@
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Author"></label>
                 <input asp-for="Author" class="form-control" />
                 <span asp-validation-for="Author" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Description"></label>
                 <textarea asp-for="Description" class="form-control"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="TotalPages"></label>
                 <input asp-for="TotalPages" class="form-control" />
                 <span asp-validation-for="TotalPages" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Add Book" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
+
+@section scripts{
+
+    <script>
+        function MyComplete(data) {
+            alert("Complete");
+        }
+
+        function MySuccess(data) {
+            alert("Success");
+        }
+
+        function MyFailure(data) {
+            alert("Failure");
+        }
+    </script>
+
+}
