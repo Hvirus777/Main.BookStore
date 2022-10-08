@@ -12,7 +12,7 @@ namespace Main.BookStore.Controllers
     {
         private readonly NewBookAlertConfig _newBookAlertConfig;
 
-        public HomeController(IOptions<NewBookAlertConfig> newBookAlertConfig)
+        public HomeController(IOptionsSnapshot<NewBookAlertConfig> newBookAlertConfig)
         {
             _newBookAlertConfig = newBookAlertConfig.Value;
         }
