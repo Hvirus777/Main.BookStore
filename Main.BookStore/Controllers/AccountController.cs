@@ -16,8 +16,9 @@ namespace Main.BookStore.Controllers
         }
 
         [Route("sign-up")]
-        public IActionResult Signup()
+        public IActionResult Signup(bool isSuccess = false)
         {
+            ViewBag.IsSuccess = isSuccess;
             return View();
         }
 
@@ -41,8 +42,32 @@ namespace Main.BookStore.Controllers
                 ModelState.Clear();
             }
 
+            return RedirectToAction(nameof(Signup), new { isSuccess = true});
+            //  return View(userModel);
+        }
 
-            return View(userModel);
+        [Route("login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [Route("login")]
+        [HttpPost]
+        public async Task<IActionResult> Login(SignInModel signInModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _accountRepository.PasswordSignInAsync(signInModel);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ModelState.AddModelError("", "Invalid credentials");
+            }
+
+            return View(signInModel);
         }
     }
 }
