@@ -1,4 +1,5 @@
-﻿@inject Microsoft.Extensions.Configuration.IConfiguration _configuration
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration _configuration
 
 
 <header>
@@ -51,3 +52,11 @@
         </div>
     </nav>
 </header>
+
+@if (_configuration.GetValue<bool>("NewBookAlert:Key1"))
+{
+    <div class="alert alert-info" role="alert">
+        @(_configuration.GetValue<string>("NewBookAlert:BookName"))
+    </div>
+}
+

@@ -43,6 +43,11 @@ namespace Main.BookStore.Controllers
             var key3 = configuration["infoOB:Key3:Key3of3"];
 
 
+            var strs = configuration.GetValue<bool>("DisplayNewBookAlert"); // reading value based on its type
+
+            var strs1 = configuration.GetValue<bool>("NewBookAlert:Key1"); // reading value based on its type from obj
+            var strs2 = configuration.GetValue<string>("\"NewBookAlert:Key2"); // reading value based on its type
+
             dynamic data = new ExpandoObject(); // ExpandoObject is used to pass Anonymous Object
             data.id = 1;
             data.name = "Harsh";
