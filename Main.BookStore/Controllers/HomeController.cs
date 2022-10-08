@@ -1,5 +1,6 @@
 ﻿using Main.BookStore.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System.Dynamic;
 
 namespace Main.BookStore.Controllers
@@ -7,6 +8,16 @@ namespace Main.BookStore.Controllers
     [Route("[controller]/[action]")]
     public class HomeController : Controller
     {
+        private readonly IConfiguration configuration;
+
+        public HomeController(IConfiguration _configuration)
+        {
+            configuration = _configuration;
+        }
+
+
+
+
         [ViewData]
         public string CustomProperty { get; set; }
         [ViewData]
@@ -26,6 +37,12 @@ namespace Main.BookStore.Controllers
       //  [Route("[controller]/[action]")]  // Duplicacy issue because need to write it over all action method so just remove it and write it above controller. ( Controller Level attribute Routing )
         public ViewResult Index()
         {
+            var res = configuration["AppName"];
+            var key1 = configuration["infoOB:Key1"];
+            var key2 = configuration["infoOB:Key2"];
+            var key3 = configuration["infoOB:Key3:Key3of3"];
+
+
             dynamic data = new ExpandoObject(); // ExpandoObject is used to pass Anonymous Object
             data.id = 1;
             data.name = "Harsh";

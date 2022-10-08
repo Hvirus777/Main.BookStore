@@ -1,6 +1,7 @@
 ﻿using Main.BookStore.Data;
 using Main.BookStore.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,12 @@ namespace Main.BookStore.Repository
     {
 
         private readonly BookStoreContext _context = null;
+        private readonly IConfiguration configuration;
 
-        public BookRepository(BookStoreContext context)
+        public BookRepository(BookStoreContext context,IConfiguration _configuration)
         {
             _context = context;
+            configuration = _configuration;
         }
 
         public async Task<int> AddNewBook(BookModel model)
@@ -233,7 +236,7 @@ namespace Main.BookStore.Repository
 
         public string GetAppName()
         {
-            return "Book Store App";
+            return configuration["AppName"];
         }
 
     }
