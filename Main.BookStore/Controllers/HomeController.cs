@@ -4,6 +4,7 @@ using System.Dynamic;
 
 namespace Main.BookStore.Controllers
 {
+    [Route("[controller]/[action]")]
     public class HomeController : Controller
     {
         [ViewData]
@@ -15,6 +16,14 @@ namespace Main.BookStore.Controllers
         [ViewData]
         public BookModel bookModel{ get; set; }
 
+
+
+        // ~ sign will override the setting of routing done at controller level above controller. If remove ~ then it will show 404
+        [Route("~/")]
+        //[Route("home/index")]   // pattern for attribute routing using mapcontroller endpoint but problem here is if there is any change in name of action or controller in future then this pattern needs to be updated as well. SO to resolve this we use token routing as shown below.
+
+
+      //  [Route("[controller]/[action]")]  // Duplicacy issue because need to write it over all action method so just remove it and write it above controller. ( Controller Level attribute Routing )
         public ViewResult Index()
         {
             dynamic data = new ExpandoObject(); // ExpandoObject is used to pass Anonymous Object
@@ -31,11 +40,14 @@ namespace Main.BookStore.Controllers
 
             return View();
         }
+
+        [HttpGet("~/about-us")]  //Attribute Routing using HttpVerb + routing
         public ViewResult AboutUs()
         {
             PageTitle = "About Us";
             return View();
         }
+        [Route("~/contact-us")] // Normal Attribute Routing
         public ViewResult ContactUs()
         {
             PageTitle = "Contact Us";

@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace Main.BookStore.Controllers
 {
+    [Route("[controller]/[action]")]
     public class BookController : Controller
     {
         [ViewData]
@@ -30,6 +31,8 @@ namespace Main.BookStore.Controllers
             _languageRepository = languageRepository;
             _webHostEnvironment = webHostEnvironment;
         }
+
+        [Route("~/all-books")]
 
         public async Task<IActionResult> GetAllBooks()
         {

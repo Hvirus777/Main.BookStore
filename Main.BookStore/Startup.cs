@@ -22,7 +22,7 @@ namespace Main.BookStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BookStoreContext>(
-                options=>options.UseSqlServer("Server=(local)\\SQLEXPRESS;Database=BookStore;Integrated Security=True"));
+                options => options.UseSqlServer("Server=(local)\\SQLEXPRESS;Database=BookStore;Integrated Security=True"));
 
             services.AddControllersWithViews();
 
@@ -31,9 +31,9 @@ namespace Main.BookStore
 #if DEBUG
 
             services.AddRazorPages().AddRazorRuntimeCompilation();
-                
+
             // Uncomment this code to disable Client SIde Validation
-            
+
             //    .AddViewOptions(options => {
 
             //    options.HtmlHelperOptions.ClientValidationEnabled = false;
@@ -68,12 +68,27 @@ namespace Main.BookStore
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute();
+             //   endpoints.MapDefaultControllerRoute();
 
                 //endpoints.MapControllerRoute(
                 //        name:"Default",
                 //        pattern: "bookApp/{controller=Home}/{action=Index}/{id?}"
                 //);
+
+
+                //Conventional Routing below
+
+                //endpoints.MapControllerRoute(
+                //        name: "Default",
+                //        pattern: "about-us",
+                //        defaults : new { controller = "Home",action="AboutUs" }
+
+                //);
+
+
+
+                endpoints.MapControllers();
+
 
                 //endpoints.MapGet("/", async context =>
                 //{
