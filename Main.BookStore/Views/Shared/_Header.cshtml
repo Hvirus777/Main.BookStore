@@ -2,7 +2,9 @@
 @inject IConfiguration _configuration
 
 @{
-    var newBook = _configuration.GetSection("NewBookAlert");
+    var newBook = new NewBookAlertConfig();
+
+    _configuration.Bind("NewBookAlert", newBook);
 }
 
 <header>
@@ -58,10 +60,10 @@
 
 
 
-@if (newBook.GetValue<bool>("Key1"))
+@if (newBook.Key1)
 {
     <div class="alert alert-info" role="alert">
-        @(newBook.GetValue<string>("BookName"))
+        @(newBook.BookName)
     </div>
 }
 
