@@ -36,6 +36,16 @@ namespace Main.BookStore
 
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<BookStoreContext>();
 
+            //updating Password Policy
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequiredLength = 5;
+                options.Password.RequiredUniqueChars = 1;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            });
             services.AddControllersWithViews();
 
             // this should only work in Development Env, not in Testing or production or staging so to do that we use #If debug statement
