@@ -1,5 +1,6 @@
 ﻿using Main.BookStore.Models;
 using Main.BookStore.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -78,6 +79,7 @@ namespace Main.BookStore.Controllers
         }
 
 
+        [Authorize]
         [Route("/New-Book")]
         public async Task<ViewResult> AddNewBook(bool isSuccess = false, int bookId = 0)
         {

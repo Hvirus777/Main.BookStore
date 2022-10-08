@@ -46,6 +46,12 @@ namespace Main.BookStore
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
             });
+
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.LoginPath = configuration["Application:LoginPath"];
+            });
+
             services.AddControllersWithViews();
 
             // this should only work in Development Env, not in Testing or production or staging so to do that we use #If debug statement
@@ -77,8 +83,6 @@ namespace Main.BookStore
 
             app.UseStaticFiles();
 
-            
-
             /*
              
              TO use Static file from folders other than wwwroot folder
@@ -93,9 +97,11 @@ namespace Main.BookStore
 
             app.UseAuthentication();
 
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
-             //   endpoints.MapDefaultControllerRoute();
+                //   endpoints.MapDefaultControllerRoute();
 
                 //endpoints.MapControllerRoute(
                 //        name:"Default",
