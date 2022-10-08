@@ -231,7 +231,10 @@ namespace Main.BookStore.Repository
             return null;
         }
 
-
+        public string GetAppName()
+        {
+            return "Book Store App";
+        }
 
     }
 }

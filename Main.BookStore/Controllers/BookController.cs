@@ -87,7 +87,7 @@ namespace Main.BookStore.Controllers
             };
 
 
-            ViewBag.Language = new SelectList(await _languageRepository.GetAllLanguage(), "Id", "Name");
+            //ViewBag.Language = new SelectList(await _languageRepository.GetAllLanguage(), "Id", "Name");
 
             PageTitle = " Add new Book";
             ViewBag.IsSuccess = isSuccess;
@@ -142,7 +142,7 @@ namespace Main.BookStore.Controllers
                 }
 
             }
-            ViewBag.Language = new SelectList(await _languageRepository.GetAllLanguage(), "Id", "Name");
+          //  ViewBag.Language = new SelectList(await _languageRepository.GetAllLanguage(), "Id", "Name");
 
 
 

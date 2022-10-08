@@ -1,8 +1,6 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@inject Main.BookStore.Repository.IBookRepository _bookRepo
+
+
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
@@ -13,7 +11,7 @@
                 only works on same server
                 do not work if site is hosted on different server like azure *@
                 <img src="~/images/logo.png" width="30" height="30" asp-append-version="true" />
-                Book store
+               @_bookRepo.GetAppName()
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
