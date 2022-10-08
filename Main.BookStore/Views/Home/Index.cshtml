@@ -39,16 +39,26 @@
         <p big>Top books By Attribute</p>
         <div class="row">
             <div class="col-md-4">
-                <partial name="_BookThumnail" model="new BookModel()" />
+                @*<partial name="_BookThumnail" model="new BookModel()" />*@
+                @Html.Partial("_BookThumnail",new BookModel()) 
             </div>
             <div class="col-md-4">
-                <partial name="_BookThumnail" model="new BookModel()" />
+                @*<partial name="_BookThumnail" model="new BookModel()" />*@
+                @await Html.PartialAsync("_BookThumnail",new BookModel())
             </div>
             <div class="col-md-4">
-                <partial name="_BookThumnail" model="new BookModel()" />
+                @*<partial name="_BookThumnail" model="new BookModel()" />*@
+
+                @{
+                    Html.RenderPartial("_BookThumnail", new BookModel());
+                }
             </div>
             <div class="col-md-4">
-                <partial name="_BookThumnail" model="new BookModel()" />
+                @*<partial name="_BookThumnail" model="new BookModel()" />*@
+
+                @{
+                   await Html.RenderPartialAsync("_BookThumnail", new BookModel());
+                }
             </div>
         </div>
     </div>
