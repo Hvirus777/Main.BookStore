@@ -113,6 +113,12 @@ namespace Main.BookStore.Controllers
                     }
                 }
 
+                if (bookModel.BookPDF != null)
+                {
+                    string folder = "books/pdf/";
+
+                    bookModel.BookPDFUrl = await UploadImage(folder, bookModel.BookPDF);
+                }
 
                 var id = await _bookRepository.AddNewBook(bookModel);
 

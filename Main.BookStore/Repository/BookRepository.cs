@@ -32,7 +32,8 @@ namespace Main.BookStore.Repository
                 CreatedOn = DateTime.UtcNow,
                 UpdatedOn = DateTime.UtcNow,
                 LanguageId = model.LanguageId,
-                CoverImageUrl = model.CoverImageURL
+                CoverImageUrl = model.CoverImageURL,
+                BookPdfUrl=model.BookPDFUrl
 
             };
 
@@ -156,7 +157,10 @@ namespace Main.BookStore.Repository
                          Name = x.Name,
                          Id = x.Id,
                          URL = x.URL
-                     }).ToList()
+                     }).ToList(),
+                     BookPDFUrl=book.BookPdfUrl
+                     
+
                  }).FirstOrDefaultAsync();
 
             return bookData;
