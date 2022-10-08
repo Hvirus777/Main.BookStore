@@ -1,6 +1,9 @@
 ﻿@using Microsoft.Extensions.Configuration
 @inject IConfiguration _configuration
 
+@{
+    var newBook = _configuration.GetSection("NewBookAlert");
+}
 
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -53,10 +56,12 @@
     </nav>
 </header>
 
-@if (_configuration.GetValue<bool>("NewBookAlert:Key1"))
+
+
+@if (newBook.GetValue<bool>("Key1"))
 {
     <div class="alert alert-info" role="alert">
-        @(_configuration.GetValue<string>("NewBookAlert:BookName"))
+        @(newBook.GetValue<string>("BookName"))
     </div>
 }
 
