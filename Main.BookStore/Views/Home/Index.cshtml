@@ -35,6 +35,10 @@
     <div class="container">
         @*<h3 class="h3">Top books</h3>*@
 
+        @await Component.InvokeAsync("TopBooks")
+
+        <vc:top-books></vc:top-books>
+
         <big>Top books</big>
         <p big>Top books By Attribute</p>
         <div class="row">
