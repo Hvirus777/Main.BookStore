@@ -1,11 +1,11 @@
 ﻿@using Microsoft.Extensions.Configuration
+
 @inject IConfiguration _configuration
-
-@{
-    var newBook = new NewBookAlertConfig();
-
-    _configuration.Bind("NewBookAlert", newBook);
-}
+@inject Microsoft.Extensions.Options.IOptions<NewBookAlertConfig> _newBookAlertConfiguration
+ 
+    @{
+        var newBookAlertConfiguration = _newBookAlertConfiguration.Value;
+    }
 
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -60,10 +60,10 @@
 
 
 
-@if (newBook.Key1)
+@if (newBookAlertConfiguration.Key1)
 {
     <div class="alert alert-info" role="alert">
-        @(newBook.BookName)
+        @(newBookAlertConfiguration.BookName)
     </div>
 }
 

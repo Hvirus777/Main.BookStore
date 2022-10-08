@@ -1,6 +1,8 @@
 ﻿using Main.BookStore.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Options;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System.Dynamic;
 
 namespace Main.BookStore.Controllers
@@ -8,11 +10,11 @@ namespace Main.BookStore.Controllers
     [Route("[controller]/[action]")]
     public class HomeController : Controller
     {
-        private readonly IConfiguration configuration;
+        private readonly NewBookAlertConfig _newBookAlertConfig;
 
-        public HomeController(IConfiguration _configuration)
+        public HomeController(IOptions<NewBookAlertConfig> newBookAlertConfig)
         {
-            configuration = _configuration;
+            _newBookAlertConfig = newBookAlertConfig.Value;
         }
 
 
@@ -37,16 +39,10 @@ namespace Main.BookStore.Controllers
       //  [Route("[controller]/[action]")]  // Duplicacy issue because need to write it over all action method so just remove it and write it above controller. ( Controller Level attribute Routing )
         public ViewResult Index()
         {
+             
+            bool IsDisplay = _newBookAlertConfig.Key1;
 
-            var newBookAlert = new NewBookAlertConfig();
-
-            configuration.Bind("NewBookAlert", newBookAlert);
-
-            bool IsDisplay = newBookAlert.Key1;
-
-
-
-
+             
           //  var newBook = configuration.GetSection("NewBookAlert");
 
             //var res = configuration["AppName"];
