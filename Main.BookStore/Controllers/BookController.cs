@@ -42,7 +42,18 @@ namespace Main.BookStore.Controllers
             return View(books);
         }
 
-        [Route("/book-details/{id}", Name = "BookDetailsRoute")]
+
+        /*
+          Route constraints eg. should attach type of parameters with :type of parameters and there are many more constraints. So if the value doesnt match the parameter constraints then it will return 404 page not found and this can be handled by Exception handling and we can show nice decorated 404 page not found page. 
+
+        few eg of RouteContraints 
+         [Route("/book-details/{name:alpha:minLength(5):regex()}"]
+
+        https://github.com/dotnet/aspnetcore/blob/main/src/Http/Routing/src/Constraints/DecimalRouteConstraint.cs
+        
+        */
+
+        [Route("/book-details/{id:int:min(1)}", Name = "BookDetailsRoute")]
         public async Task<IActionResult> GetBook(int id, string nameOfBook)
         {
 
@@ -53,7 +64,7 @@ namespace Main.BookStore.Controllers
             //data.name = "Harsh Soni";
 
             var data = await _bookRepository.GetBookById(id);
-           
+
 
             PageTitle = data.Title + " Book Details ";
 
