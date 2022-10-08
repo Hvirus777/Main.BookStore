@@ -113,6 +113,64 @@ namespace Main.BookStore.Repository
             return bookList;
         }
 
+
+        public async Task<List<BookModel>> GetTopBookAsync()
+        {
+            #region CodeByMeUsingIncluce
+
+            // var books = new List<BookModel>();
+            //var allBooks = await _context.books.Include(x => x.Language).ToListAsync();
+
+            //if (allBooks?.Any() == true)
+            //{
+
+            //    foreach (var book in allBooks)
+            //    {
+            //        var bookData = new BookModel();
+
+            //        bookData.Author = book.Author;
+            //        bookData.Title = book.Title;
+            //        bookData.Description = book.Description;
+            //        bookData.TotalPages = book.TotalPages;
+            //        bookData.Category = book.Category;
+            //        bookData.Id = book.Id;
+            //        bookData.LanguageId = book.LanguageId;
+            //        bookData.CreatedOn = book.CreatedOn;
+            //        bookData.UpdatedOn = book.UpdatedOn;
+            //        //  bookData.Language = book.Language.Name.Where(id == book.LanguageId)
+
+            //        var language = new LanguageModel()
+            //        {
+
+            //        };
+
+            //        books.Add(bookData);
+            //    }
+            #endregion
+
+            var bookList = await _context.books.Select(book => new BookModel
+            {
+                Author = book.Author,
+                Category = book.Category,
+                Description = book.Description,
+                Id = book.Id,
+                LanguageId = book.LanguageId,
+                Language = book.Language.Name,
+                Title = book.Title,
+                TotalPages = book.TotalPages,
+                CoverImageURL = book.CoverImageUrl,
+                Gallery = book.bookGallery.Select(x => new GalleryModel()
+                {
+                    Name = x.Name,
+                    Id = x.Id,
+                    URL = x.URL
+                }).ToList()
+
+            }).Take(3).ToListAsync();
+
+            return bookList;
+        }
+
         public async Task<BookModel> GetBookById(int id)
         {
             #region Code By me

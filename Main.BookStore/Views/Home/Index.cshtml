@@ -35,36 +35,12 @@
     <div class="container">
         @*<h3 class="h3">Top books</h3>*@
 
-        @await Component.InvokeAsync("TopBooks")
-
-        <vc:top-books></vc:top-books>
+       @* @await Component.InvokeAsync("TopBooks")*@
 
         <big>Top books</big>
-        <p big>Top books By Attribute</p>
-        <div class="row">
-            <div class="col-md-4">
-                @*<partial name="_BookThumnail" model="new BookModel()" />*@
-                @Html.Partial("_BookThumnail",new BookModel()) 
-            </div>
-            <div class="col-md-4">
-                @*<partial name="_BookThumnail" model="new BookModel()" />*@
-                @await Html.PartialAsync("_BookThumnail",new BookModel())
-            </div>
-            <div class="col-md-4">
-                @*<partial name="_BookThumnail" model="new BookModel()" />*@
-
-                @{
-                    Html.RenderPartial("_BookThumnail", new BookModel());
-                }
-            </div>
-            <div class="col-md-4">
-                @*<partial name="_BookThumnail" model="new BookModel()" />*@
-
-                @{
-                   await Html.RenderPartialAsync("_BookThumnail", new BookModel());
-                }
-            </div>
-        </div>
+        <vc:top-books></vc:top-books>
+         
+        
     </div>
 </div>
  
