@@ -11,7 +11,7 @@ using static System.Reflection.Metadata.BlobBuilder;
 
 namespace Main.BookStore.Repository
 {
-    public class BookRepository
+    public class BookRepository : IBookRepository
     {
 
         private readonly BookStoreContext _context = null;
@@ -33,7 +33,7 @@ namespace Main.BookStore.Repository
                 UpdatedOn = DateTime.UtcNow,
                 LanguageId = model.LanguageId,
                 CoverImageUrl = model.CoverImageURL,
-                BookPdfUrl=model.BookPDFUrl
+                BookPdfUrl = model.BookPDFUrl
 
             };
 
@@ -216,8 +216,8 @@ namespace Main.BookStore.Repository
                          Id = x.Id,
                          URL = x.URL
                      }).ToList(),
-                     BookPDFUrl=book.BookPdfUrl
-                     
+                     BookPDFUrl = book.BookPdfUrl
+
 
                  }).FirstOrDefaultAsync();
 

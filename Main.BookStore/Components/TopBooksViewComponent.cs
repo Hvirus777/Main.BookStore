@@ -6,8 +6,8 @@ namespace Main.BookStore.Components
 {
     public class TopBooksViewComponent : ViewComponent
     {
-        private readonly BookRepository _bookRepository = null;
-        public TopBooksViewComponent(BookRepository bookRepository)
+        private readonly IBookRepository _bookRepository = null;
+        public TopBooksViewComponent(IBookRepository bookRepository)
         {
             _bookRepository = bookRepository;
         }
