@@ -4,6 +4,7 @@ using Main.BookStore.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,6 +33,8 @@ namespace Main.BookStore
         {
             services.AddDbContext<BookStoreContext>(
                 options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<BookStoreContext>();
 
             services.AddControllersWithViews();
 
@@ -63,6 +66,8 @@ namespace Main.BookStore
 
             app.UseStaticFiles();
 
+            
+
             /*
              
              TO use Static file from folders other than wwwroot folder
@@ -74,6 +79,8 @@ namespace Main.BookStore
 
             //});*/
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
