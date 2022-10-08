@@ -12,9 +12,9 @@ namespace Main.BookStore.Components
             _bookRepository = bookRepository;
         }
          
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(int count)
         {
-            var books = await _bookRepository.GetTopBookAsync();
+            var books = await _bookRepository.GetTopBookAsync(count);
 
             return View(books);
         }

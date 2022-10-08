@@ -114,7 +114,7 @@ namespace Main.BookStore.Repository
         }
 
 
-        public async Task<List<BookModel>> GetTopBookAsync()
+        public async Task<List<BookModel>> GetTopBookAsync(int count)
         {
             #region CodeByMeUsingIncluce
 
@@ -166,7 +166,7 @@ namespace Main.BookStore.Repository
                     URL = x.URL
                 }).ToList()
 
-            }).Take(3).ToListAsync();
+            }).Take(count).ToListAsync();
 
             return bookList;
         }
