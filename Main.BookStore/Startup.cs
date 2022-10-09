@@ -47,11 +47,13 @@ namespace Main.BookStore
                 options.Password.RequireUppercase = false;
             });
 
+            //Custom Login Path if user is not login and accessing unauthorize pages it will be redirected to login page
             services.ConfigureApplicationCookie(config =>
             {
                 config.LoginPath = configuration["Application:LoginPath"];
             });
 
+            //To use MVC controller and views service.
             services.AddControllersWithViews();
 
             // this should only work in Development Env, not in Testing or production or staging so to do that we use #If debug statement
@@ -60,7 +62,7 @@ namespace Main.BookStore
 
             services.AddRazorPages().AddRazorRuntimeCompilation();
 
-            // Uncomment this code to disable Client SIde Validation
+            /* Uncomment this code below to disable Client SIde Validation */
 
             //    .AddViewOptions(options => {
 
@@ -117,8 +119,6 @@ namespace Main.BookStore
                 //        defaults : new { controller = "Home",action="AboutUs" }
 
                 //);
-
-
 
                 endpoints.MapControllers();
 
