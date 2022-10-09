@@ -1,4 +1,5 @@
 using Main.BookStore.Data;
+using Main.BookStore.Helper;
 using Main.BookStore.Models;
 using Main.BookStore.Repository;
 using Microsoft.AspNetCore.Builder;
@@ -73,6 +74,11 @@ namespace Main.BookStore
             services.AddScoped<ILanguageRepository, LanguageRepository>();
             services.Configure<NewBookAlertConfig>(configuration.GetSection("NewBookAlert"));
             services.AddScoped<IAccountRepository, AccountRepository>();
+
+            //to use custom claims
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
+            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

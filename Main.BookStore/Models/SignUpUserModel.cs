@@ -6,7 +6,9 @@ namespace Main.BookStore.Models
     public class SignUpUserModel
     {
         [Required(ErrorMessage ="Please enter your first name")]
+        [Display(Name = "First name")]
         public string FirstName { get; set; }
+        [Display(Name = "Last name")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Please enter your email")]
