@@ -22,11 +22,11 @@ namespace Main.BookStore
 {
     public class Startup
     {
-        private readonly IConfiguration configuration;
+        private readonly IConfiguration _configuration;
 
-        public Startup(IConfiguration _configuration)
+        public Startup(IConfiguration configuration)
         {
-            configuration = _configuration;
+            _configuration = configuration;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -34,7 +34,7 @@ namespace Main.BookStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BookStoreContext>(
-                options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+                options => options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<BookStoreContext>();
 
@@ -52,12 +52,12 @@ namespace Main.BookStore
             //Custom Login Path if user is not login and accessing unauthorize pages it will be redirected to login page
             services.ConfigureApplicationCookie(config =>
             {
-                config.LoginPath = configuration["Application:LoginPath"];
+                config.LoginPath = _configuration["Application:LoginPath"];
             });
 
             //To use MVC controller and views service.
             services.AddControllersWithViews();
-
+            services.AddScoped<IEmailService, EmailService>();
             // this should only work in Development Env, not in Testing or production or staging so to do that we use #If debug statement
 
 #if DEBUG
@@ -72,15 +72,16 @@ namespace Main.BookStore
             //});
 #endif
             services.AddScoped<IBookRepository, BookRepository>();
-            services.AddScoped<ILanguageRepository, LanguageRepository>();
-            services.Configure<NewBookAlertConfig>(configuration.GetSection("NewBookAlert"));
+            services.AddScoped<ILanguageRepository, LanguageRepository>();            
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IUserService, UserService>();
-
+            services.AddScoped<IEmailService, EmailService>();
             //to use custom claims
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
-            
 
+
+            services.Configure<NewBookAlertConfig>(_configuration.GetSection("NewBookAlert"));
+            services.Configure<SMTPConfigModel>(_configuration.GetSection("SMTPConfig"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
