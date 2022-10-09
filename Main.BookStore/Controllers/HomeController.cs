@@ -1,4 +1,5 @@
 ﻿using Main.BookStore.Models;
+using Main.BookStore.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.Extensions.Configuration;
@@ -11,10 +12,12 @@ namespace Main.BookStore.Controllers
     public class HomeController : Controller
     {
         private readonly NewBookAlertConfig _newBookAlertConfig;
+        private readonly IUserService _userService;
 
-        public HomeController(IOptionsSnapshot<NewBookAlertConfig> newBookAlertConfig)
+        public HomeController(IOptionsSnapshot<NewBookAlertConfig> newBookAlertConfig,IUserService userService)
         {
             _newBookAlertConfig = newBookAlertConfig.Value;
+            _userService = userService;
         }
 
 
@@ -39,7 +42,10 @@ namespace Main.BookStore.Controllers
       //  [Route("[controller]/[action]")]  // Duplicacy issue because need to write it over all action method so just remove it and write it above controller. ( Controller Level attribute Routing )
         public ViewResult Index()
         {
-             
+
+            var userId = _userService.GetUserId();
+            var isUserLoggedin = _userService.isAuthenticated();
+
             bool IsDisplay = _newBookAlertConfig.Key1;
 
              

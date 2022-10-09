@@ -2,6 +2,7 @@ using Main.BookStore.Data;
 using Main.BookStore.Helper;
 using Main.BookStore.Models;
 using Main.BookStore.Repository;
+using Main.BookStore.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -74,6 +75,7 @@ namespace Main.BookStore
             services.AddScoped<ILanguageRepository, LanguageRepository>();
             services.Configure<NewBookAlertConfig>(configuration.GetSection("NewBookAlert"));
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IUserService, UserService>();
 
             //to use custom claims
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
